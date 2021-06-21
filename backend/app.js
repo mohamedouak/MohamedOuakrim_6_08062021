@@ -4,7 +4,16 @@ const express = require('express');
 const bodyParser = require('body-parser');
 //On importe Mongoose
 const mongoose = require('mongoose');
+//On importe path
 const path = require('path');
+//On importe cookie-session
+const cookieSession = require('cookie-session');
+//On importe helmet
+const helmet = require("helmet");
+
+const api = express();
+
+api.use(helmet());
 
 const saucesRoutes = require('./routes/sauces');
 
@@ -19,6 +28,7 @@ mongoose.connect('mongodb+srv://mohamed_59:Tisslane59@cluster0.yorla.mongodb.net
     useUnifiedTopology: true })
   .then(() => console.log('Connexion à MongoDB réussie !'))
   .catch(() => console.log('Connexion à MongoDB échouée !'));
+  
 
 //Fonction middleware qui reçoit et gère la requête et la réponse
 //Toutes les demandes peuvent accéder à l'Api 
@@ -32,7 +42,6 @@ app.use((req, res, next) => {
 
 //Transforme le corps de la requête en JS utilisable
 app.use(express.json());
-// app.use(bodyParser.json());
 
 app.use('/images', express.static(path.join(__dirname, 'images')));
 app.use('/api/sauces', saucesRoutes);

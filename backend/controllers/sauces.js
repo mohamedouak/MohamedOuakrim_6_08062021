@@ -37,7 +37,6 @@ exports.deleteSauce =(req, res, next) => {
   .catch(error => res.status(500).json({ error }));
 };
 
-// Aimer ou pas une sauce
 exports.likeOrDislike = (req, res, next) => {
   if (req.body.like === 1) {
       Sauce.updateOne({ _id: req.params.id }, { $inc: { likes: req.body.like++ }, $push: { usersLiked: req.body.userId } })

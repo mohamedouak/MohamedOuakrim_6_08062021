@@ -1,4 +1,4 @@
-//On importe le package http
+//On importe le package http de node
 const http = require('http');
 
 //On importe notre application (app.js)
