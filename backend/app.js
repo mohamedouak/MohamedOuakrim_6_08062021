@@ -1,15 +1,10 @@
-//On importe express
 const express = require('express');
-//On importe body-parser
 const bodyParser = require('body-parser');
-//On importe Mongoose
 const mongoose = require('mongoose');
-//On importe path
 const path = require('path');
-//On importe cookie-session
 const cookieSession = require('cookie-session');
-//On importe helmet
-const helmet = require("helmet");
+const helmet = require('helmet');
+const dotenv = require('dotenv').config();
 
 const api = express();
 
@@ -23,7 +18,7 @@ const userRoutes = require('./routes/user');
 const app = express();
 
 //Connection à mongoDb
-mongoose.connect('mongodb+srv://mohamed_59:Tisslane59@cluster0.yorla.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',
+mongoose.connect(`mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@${process.env.DB_HOST}/${process.env.DB_NAME}?retryWrites=true&w=majority`,
   { useNewUrlParser: true,
     useUnifiedTopology: true })
   .then(() => console.log('Connexion à MongoDB réussie !'))
