@@ -1,11 +1,9 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const path = require('path');
-const cookieSession = require('cookie-session');
 const helmet = require('helmet');
 const dotenv = require('dotenv').config();
-
-const api = express();
+const session = require('express-session');
 
 const saucesRoutes = require('./routes/sauces');
 
@@ -33,7 +31,6 @@ app.use((req, res, next) => {
 
 //Transforme le corps de la requête en JS utilisable
 app.use(express.json());
-app.use(cookieSession);
 app.use(helmet());
 
 app.use('/images', express.static(path.join(__dirname, 'images')));
