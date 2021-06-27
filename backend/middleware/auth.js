@@ -1,5 +1,7 @@
+//Token d'authentification 
 const jwt = require('jsonwebtoken');
 
+//Fonction qui gère l'authentification
 module.exports = (req, res, next) => {
     try {
       const token = req.headers.authorization.split(' ')[1];

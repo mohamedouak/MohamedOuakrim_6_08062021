@@ -1,7 +1,7 @@
 //On importe le package http de node
 const http = require('http');
 
-//On importe notre application (app.js)
+//On importe notre application express (app.js)
 const app = require('./app');
 
 //Fonction qui renvoie un port valide (sous forme de string ou number)

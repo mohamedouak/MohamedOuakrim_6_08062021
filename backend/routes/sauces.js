@@ -1,9 +1,10 @@
+//Import de express
 const express = require('express');
 const router = express.Router();
 
+//Import du middleware d'authentification, de gestion des images, et des sauces
 const auth = require('../middleware/auth');
 const multer = require('../middleware/multer-config');
-
 const saucesCtrl = require('../controllers/sauces');
 
   //Crée l'objet

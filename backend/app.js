@@ -1,8 +1,14 @@
+//On importe le framework Express
 const express = require('express');
+//On importe le package mongoose (pour l'intéraction avec la BDD)
 const mongoose = require('mongoose');
+//On importe path pour avoir accès au système de fichier
 const path = require('path');
+//On importe helmet pour la configuration de nos en-têtes http
 const helmet = require('helmet');
+//Fichier .env pour sécuriser les données sensibles et qu'elles ne soient pas visibles
 const dotenv = require('dotenv').config();
+//On importe express-session pour sécuriser les sessions
 const session = require('express-session');
 
 const saucesRoutes = require('./routes/sauces');
@@ -20,7 +26,6 @@ mongoose.connect(`mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@${
   
 
 //Fonction middleware qui reçoit et gère la requête et la réponse
-//Toutes les demandes peuvent accéder à l'Api 
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization');
@@ -32,6 +37,12 @@ app.use((req, res, next) => {
 //Transforme le corps de la requête en JS utilisable
 app.use(express.json());
 app.use(helmet());
+app.use(session({
+  secret: 'keyboard cat',
+  resave: false,
+  saveUninitialized: true,
+  cookie: { secure: true }
+}))
 
 app.use('/images', express.static(path.join(__dirname, 'images')));
 app.use('/api/sauces', saucesRoutes);
