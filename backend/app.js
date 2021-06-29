@@ -8,8 +8,6 @@ const path = require('path');
 const helmet = require('helmet');
 //Fichier .env pour sécuriser les données sensibles et qu'elles ne soient pas visibles
 const dotenv = require('dotenv').config();
-//On importe express-session pour sécuriser les sessions
-const session = require('express-session');
 
 const saucesRoutes = require('./routes/sauces');
 
@@ -37,12 +35,7 @@ app.use((req, res, next) => {
 //Transforme le corps de la requête en JS utilisable
 app.use(express.json());
 app.use(helmet());
-app.use(session({
-  secret: 'keyboard cat',
-  resave: false,
-  saveUninitialized: true,
-  cookie: { secure: true }
-}))
+
 
 app.use('/images', express.static(path.join(__dirname, 'images')));
 app.use('/api/sauces', saucesRoutes);
